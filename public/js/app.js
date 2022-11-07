@@ -223,6 +223,22 @@ isOnline();
 
 // Notificaciones 
 
+function  verificaSuscripcion( activadas ) {
+
+    if ( activadas ) {
+
+        btnActivadas.removeClass('oculto');
+        btnDesactivadas.addClass('oculto');
+    } else {
+        btnActivadas.addClass('oculto');
+        btnDesactivadas.removeClass('oculto');
+    }
+}
+
+verificaSuscripcion();
+
+
+
 function enviarNotification() {
 
 
@@ -239,7 +255,7 @@ function enviarNotification() {
     };
 
 
-    new Notification()
+    new Notification();
 }
 
 function notificarme() {
@@ -250,9 +266,9 @@ return;
 }
 
 if ( Notification.permission === 'granted' ) {
-
-// new Nitification('Hola Mundo! - granted');
-enviarNotification();
+    
+    // new Nitification('Hola Mundo! - granted');
+    enviarNotification();
 
 } else if ( Notification.permission !== 'denied' || Notification.permission === 'default' ) {
 
