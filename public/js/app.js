@@ -237,10 +237,13 @@ isOnline();
 
 function  verificaSuscripcion( activadas ) {
 
+    console.log( activadas );
+
     if ( activadas ) {
 
         btnActivadas.removeClass('oculto');
         btnDesactivadas.addClass('oculto');
+
     } else {
         btnActivadas.addClass('oculto');
         btnDesactivadas.removeClass('oculto');
@@ -329,10 +332,16 @@ btnDesactivadas.on( 'click', function() {
         .then( res => res.toJSON() )
         .then( suscripcion => {
 
-            console.log(suscripcion);
+            // console.log(suscripcion);
+            fetch('api/suscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify( suscripcion )           
+            })
+            .then( verificaSuscripcion )
+            .catch( console.log );
 
-            verificaSuscripcion(suscripcion);
 
         });
     });
-})
+});
