@@ -135,11 +135,24 @@ self.addEventListener('sync', e => {
 self.addEventListener('push', e => {
 
     // console.log(e);
-    console.log(e.data.text());
+    // console.log(e.data.text());
+
+    const data = JSON.parse( e.data.text() );
+
+    console.log(data);
 
 
-    const title = e.data.text();
-    const options = {};
+    const title = e.data.titulo;
+    const options = {
+        body: data.cuerpo,
+        // icon: 'img/icons/icon-72x72.png'
+        icon: `$img/avatars/${ data.usuario }.jpg`,
+        badge: 'img/favicon.ico',
+        image: 'https://es.web.img3.acsta.net/r_654_368/newsv7/17/07/30/13/53/005215.jpg',
+        vibrate: [80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,320,160,320,160,320],
+        openUrl: '/'
+
+    };
 
 
     e.waitUntil( self.registration.showNotification( title, options ) );
